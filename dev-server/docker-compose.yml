@@ -1,0 +1,99 @@
+version: '3'
+
+services:
+  nginx:
+    image: nginx
+    ports:
+      - "8011:8011" #front
+      - "8022:8022" #backend
+      - "8033:8033" #api
+      - "8044:8044" #stp_old
+      - "8055:8055" #stp
+    volumes:
+      - ./../:/var/www/src
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/conf.d:/etc/nginx/conf.d
+    links:
+      - apple_php
+    container_name: apple_nginx
+
+  apple_php:
+    build: php/
+    volumes:
+      - ./../:/var/www/src
+    user: root
+    container_name: apple-php
+#    build:
+#      php/
+#    volumes:
+#      - .:/var/www
+#      - ./php/php.ini:/usr/local/etc/php/php.ini
+#    depends_on:
+#      - mariadb
+#    container_name: apple-php
+
+  mariadb:
+    image: mariadb
+    volumes:
+      - ./mariadb:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: qwerty
+    container_name: apple-mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    links:
+      - mariadb:db
+    ports:
+      - 8765:80
+    environment:
+      MYSQL_ROOT_PASSWORD: qwerty
+    depends_on:
+      - mariadb
+
+
+
+
+
+
+
+#stp_advanced_nginx:
+#  image: nginx
+#  ports:
+#    - "8011:8011" #front
+#    - "8022:8022" #backend
+#    - "8033:8033" #api
+#    - "8044:8044" #stp_old
+#    - "8055:8055" #stp
+#  volumes:
+#    - ./../:/var/www/src
+#    - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+#    - ./nginx/conf.d:/etc/nginx/conf.d
+#  links:
+#    - stp_advanced_php
+#  container_name: stp-advanced-nginx
+#
+#stp_advanced_php:
+#  build: php/
+#  volumes:
+#    - ./../:/var/www/src
+#  user: root
+#  container_name: stp-advanced-php
+#
+#mariadb:
+#  image: mariadb:10.3
+#  volumes:
+#    - ./mariadb:/var/lib/mysql
+#  environment:
+#    MYSQL_ROOT_PASSWORD: qwerty
+#
+#phpmyadmin:
+#  image: phpmyadmin/phpmyadmin
+#  links:
+#    - mariadb:db
+#  ports:
+#    - 8765:80
+#  environment:
+#    MYSQL_ROOT_PASSWORD: qwerty
+##  depends_on:
+##    - mariadb
