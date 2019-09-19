@@ -3,28 +3,23 @@
 use yii\db\Migration;
 
 /**
- * Class m190916_114613_apple_create_table
+ * Class m190919_162121_color_create_table
  */
-class m190916_114613_apple_create_table extends Migration
+class m190919_162121_color_create_table extends Migration
 {
     /**
      * {@inheritdoc}
      */
-    public function up()
+    public function safeUp()
     {
         $tableOptions = null;
         if ($this->db->driverName === 'mysql') {
             $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
         }
 
-        $this->createTable('{{%apple}}', [
+        $this->createTable('{{%color}}', [
             'id' => $this->primaryKey(),
             'color' => $this->string()->notNull(),
-            'create_date' => $this->integer()->notNull(),
-            'drop_date' => $this->integer()->null(),
-            'state' => $this->integer()->notNull(),
-            'how_much_is_eaten' => $this->integer()->notNull(),
-            'deleted' => $this->integer()->notNull()->defaultValue(0),
         ], $tableOptions);
     }
 
