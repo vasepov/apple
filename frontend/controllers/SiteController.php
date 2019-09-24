@@ -3,20 +3,10 @@ namespace frontend\controllers;
 
 use common\models\Apple;
 use common\models\CreateApple;
-use frontend\models\ResendVerificationEmailForm;
-use frontend\models\VerifyEmailForm;
 use Yii;
-use yii\base\InvalidArgumentException;
 use yii\helpers\Html;
-use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
-use common\models\LoginForm;
-use frontend\models\PasswordResetRequestForm;
-use frontend\models\ResetPasswordForm;
-use frontend\models\SignupForm;
-use frontend\models\ContactForm;
 
 /**
  * Site controller
@@ -78,5 +68,31 @@ class SiteController extends Controller
         }
 
         $this->redirect(['site/index']);
+    }
+
+    /**
+     * Укусываем яблоко
+     * @return array
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
+     */
+    public function actionEatApple()
+    {
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
+        if (isset($_POST['id'])) {
+            $model = Apple::findOne($_POST['id']);
+            $model->how_much_is_eaten = $_POST['size'];
+            if ($model->how_much_is_eaten == 100 && $model->delete()) {
+                return ['result' => true, 'message' => 'Яблоко съедено'];
+            }
+            if ($model->save()) {
+                return ['result' => true, 'message' => 'Яблоко укушено'];
+            } else {
+                return ['result' => false, 'message' => Html::errorSummary($model, ['header' => ''])];
+            }
+        } else {
+            return ['result' => false, 'message' => 'Не найдено кусаемое яблоко'];
+        }
     }
 }

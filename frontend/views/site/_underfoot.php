@@ -13,6 +13,9 @@ use yii\helpers\Html;
         'query' => Apple::find()->with(['state', 'color'])->where(['state_id' => State::UNDERFOOT]),
     ]),
     'summary' => '',
+    'rowOptions' => function ($data) {
+        return ['class' => 'tr-apple-' . $data->id];
+    },
     'columns' => [
         'id',
         [
@@ -36,9 +39,9 @@ use yii\helpers\Html;
         [
             'label' => 'Откусить',
             'value' => function ($data) {
-                return '<input type="range" class="slider" type="range" min="1" max="100" value="' . $data->how_much_is_eaten . '">'
+                return '<input type="range" class="slider slider-eat-' . $data->id . '" type="range" min="1" max="100" value="' . $data->how_much_is_eaten . '">'
                     .
-                    Html::button('Откусить', ['class' => 'btn']);
+                    Html::button('Откусить', ['class' => 'btn eat-apple', 'data-id' => $data->id]);
             },
             'format' => 'raw',
         ]

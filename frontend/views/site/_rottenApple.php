@@ -4,7 +4,6 @@ use common\models\Apple;
 use common\models\State;
 use yii\data\ActiveDataProvider;
 use yii\grid\GridView;
-use yii\helpers\Html;
 
 ?>
 <h3>Гнилые яблоки</h3>

@@ -29,8 +29,15 @@ class Apple extends ActiveRecord
     {
         return [
             [['color_id', 'state_id', 'how_much_is_eaten', 'create_date', 'drop_date'], 'integer'],
-            [['deleted'], 'boolean']
+            [['deleted'], 'boolean'],
+            [['how_much_is_eaten'], 'validateEat']
         ];
+    }
+
+    public function validateEat() {
+        if ($this->getOldAttribute('how_much_is_eaten') > $this->how_much_is_eaten) {
+            $this->addError('how_much_is_eaten', 'Нельзя откусить яблоко в большую сторону');
+        }
     }
 
     /** @inheritDoc */
