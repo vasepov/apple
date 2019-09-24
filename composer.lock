@@ -4,8 +4,29 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "479ef81c55accfcdd0cce616ef4143d7",
+    "content-hash": "31fd8033e91a6019f20d2c394dd774eb",
     "packages": [
+        {
+            "name": "bower-asset/bootbox",
+            "version": "v5.3.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/makeusabrew/bootbox.git",
+                "reference": "6683b7bc3271fd0cc9100583cd8c49ea3d93b428"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/makeusabrew/bootbox/zipball/6683b7bc3271fd0cc9100583cd8c49ea3d93b428",
+                "reference": "6683b7bc3271fd0cc9100583cd8c49ea3d93b428"
+            },
+            "require": {
+                "bower-asset/bootstrap": ">=3.3.7"
+            },
+            "type": "bower-asset",
+            "license": [
+                "MIT"
+            ]
+        },
         {
             "name": "bower-asset/bootstrap",
             "version": "v3.4.1",
