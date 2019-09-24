@@ -19,10 +19,10 @@ class m190916_114613_apple_create_table extends Migration
 
         $this->createTable('{{%apple}}', [
             'id' => $this->primaryKey(),
-            'color' => $this->string()->notNull(),
+            'color_id' => $this->integer()->notNull(),
             'create_date' => $this->integer()->notNull(),
             'drop_date' => $this->integer()->null(),
-            'state' => $this->integer()->notNull(),
+            'state_id' => $this->integer()->notNull(),
             'how_much_is_eaten' => $this->integer()->notNull(),
             'deleted' => $this->integer()->notNull()->defaultValue(0),
         ], $tableOptions);
