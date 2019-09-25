@@ -14,7 +14,7 @@ use yii\grid\GridView;
     <h3>Яблоки на дереве</h3>
 <?= GridView::widget([
     'dataProvider' => new ActiveDataProvider([
-        'query' => Apple::find()->with(['color'])->where(['state_id' => State::IN_TREE]),
+        'query' => Apple::find()->with(['colorModel'])->where(['state_id' => State::IN_TREE, 'deleted' => 0]),
     ]),
     'summary' => '',
     'columns' => [
@@ -25,7 +25,7 @@ use yii\grid\GridView;
                 return date('d.m.Y H:i', $data->create_date);
             },
             'contentOptions' => function ($data) {
-                return ['style' => 'color: ' . $data->color->color];
+                return ['style' => 'color: ' . $data->colorModel->color];
             }
         ]
     ],

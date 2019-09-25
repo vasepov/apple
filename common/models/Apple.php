@@ -1,4 +1,5 @@
 <?php
+
 namespace common\models;
 
 use yii\db\ActiveRecord;
@@ -13,13 +14,18 @@ use yii\db\ActiveRecord;
  * @property int $state_id
  * @property int $how_much_is_eaten
  * @property int $deleted
+ *
+ * relations
+ * @property Color $colorModel
  */
 class Apple extends ActiveRecord
 {
+    const TIME_ROTTEN_APPLE = 18000; // 5 часов на угниление яблока
+
     /** @inheritdoc */
     public static function tableName()
     {
-            return '{{%apple}}';
+        return '{{%apple}}';
     }
 
     /** @inheritdoc */
@@ -32,7 +38,8 @@ class Apple extends ActiveRecord
         ];
     }
 
-    public function validateEat() {
+    public function validateEat()
+    {
         if ($this->getOldAttribute('how_much_is_eaten') > $this->how_much_is_eaten) {
             $this->addError('how_much_is_eaten', 'Нельзя откусить яблоко в большую сторону');
         }
@@ -50,8 +57,28 @@ class Apple extends ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getColor()
+    public function getColorModel()
     {
         return $this->hasOne(Color::class, ['id' => 'color_id']);
+    }
+
+    /**
+     *  Провекра и удаление гнилых яблок
+     */
+    public function checkRottenApple()
+    {
+        $apples = self::find()->where(
+            'state_id = :stateId and drop_date + ' . self::TIME_ROTTEN_APPLE . ' < :thisTime',
+            [':stateId' => State::UNDERFOOT, ':thisTime' => time()]
+        )->all();
+        foreach ($apples as $apple) {
+            $apple->state_id = State::ROTTEN;
+            $apple->save();
+        }
+    }
+
+    public function getColor()
+    {
+        return $this->colorModel->color;
     }
 }

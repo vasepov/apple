@@ -10,7 +10,7 @@ use yii\helpers\Html;
 <h3>Яблоки на земле</h3>
 <?= GridView::widget([
     'dataProvider' => new ActiveDataProvider([
-        'query' => Apple::find()->with(['color'])->where(['state_id' => State::UNDERFOOT]),
+        'query' => Apple::find()->with(['colorModel'])->where(['state_id' => State::UNDERFOOT, 'deleted' => 0]),
     ]),
     'summary' => '',
     'rowOptions' => function ($data) {
@@ -24,7 +24,7 @@ use yii\helpers\Html;
                 return date('d.m.Y H:i', $data->create_date);
             },
             'contentOptions' => function ($data) {
-                return ['style' => 'color: ' . $data->color->color];
+                return ['style' => 'color: ' . $data->colorModel->color];
             }
         ],
         [
@@ -33,7 +33,7 @@ use yii\helpers\Html;
                 return date('d.m.Y H:i', $data->drop_date);
             },
             'contentOptions' => function ($data) {
-                return ['style' => 'color: ' . $data->color->color];
+                return ['style' => 'color: ' . $data->colorModel->color];
             }
         ],
         [

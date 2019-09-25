@@ -52,6 +52,7 @@ class SiteController extends Controller
     public function actionIndex()
     {
         $model = new Apple();
+        $model->checkRottenApple();
         return $this->render('index', ['model' => $model]);
     }
 
