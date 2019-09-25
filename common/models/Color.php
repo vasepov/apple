@@ -9,6 +9,7 @@ use yii\db\ActiveRecord;
  *
  * @property int $id
  * @property int $color
+ * @property bool $deleted
  */
 class Color extends ActiveRecord
 {
@@ -22,7 +23,8 @@ class Color extends ActiveRecord
     public function rules()
     {
         return [
-            [['color'], 'string']
+            [['color'], 'string'],
+            [['deleted'], 'boolean']
         ];
     }
 }

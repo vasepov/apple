@@ -9,7 +9,7 @@ use yii\grid\GridView;
 <h3>Гнилые яблоки</h3>
 <?= GridView::widget([
     'dataProvider' => new ActiveDataProvider([
-        'query' => Apple::find()->with(['state', 'color'])->where(['state_id' => State::ROTTEN]),
+        'query' => Apple::find()->with(['color'])->where(['state_id' => State::ROTTEN]),
     ]),
     'summary' => '',
     'columns' => [

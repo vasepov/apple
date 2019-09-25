@@ -2,31 +2,15 @@
 
 namespace common\models;
 
-use yii\db\ActiveRecord;
+use yii\base\Model;
 
 /**
- * Apple model
- *
- * @property int $id
- * @property int $name
+ * Class State
+ * @package common\models\
  */
-class State extends ActiveRecord
+class State extends Model
 {
     const IN_TREE = 1;
     const UNDERFOOT = 2;
     const ROTTEN = 3;
-
-    /** @inheritdoc */
-    public static function tableName()
-    {
-        return '{{%apple_state}}';
-    }
-
-    /** @inheritdoc */
-    public function rules()
-    {
-        return [
-            [['name'], 'string']
-        ];
-    }
 }

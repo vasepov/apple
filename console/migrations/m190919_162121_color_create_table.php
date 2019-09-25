@@ -20,6 +20,7 @@ class m190919_162121_color_create_table extends Migration
         $this->createTable('{{%color}}', [
             'id' => $this->primaryKey(),
             'color' => $this->string()->notNull(),
+            'deleted' => $this->integer()->notNull()->defaultValue(0),
         ], $tableOptions);
     }
 

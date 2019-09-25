@@ -10,7 +10,7 @@ use yii\helpers\Html;
 <h3>Яблоки на земле</h3>
 <?= GridView::widget([
     'dataProvider' => new ActiveDataProvider([
-        'query' => Apple::find()->with(['state', 'color'])->where(['state_id' => State::UNDERFOOT]),
+        'query' => Apple::find()->with(['color'])->where(['state_id' => State::UNDERFOOT]),
     ]),
     'summary' => '',
     'rowOptions' => function ($data) {

@@ -14,7 +14,7 @@ use yii\grid\GridView;
     <h3>Яблоки на дереве</h3>
 <?= GridView::widget([
     'dataProvider' => new ActiveDataProvider([
-        'query' => Apple::find()->with(['state', 'color'])->where(['state_id' => State::IN_TREE]),
+        'query' => Apple::find()->with(['color'])->where(['state_id' => State::IN_TREE]),
     ]),
     'summary' => '',
     'columns' => [

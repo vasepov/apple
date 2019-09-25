@@ -1,7 +1,9 @@
 <?php
 namespace backend\controllers;
 
+use common\models\Color;
 use Yii;
+use yii\helpers\Html;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
@@ -26,7 +28,7 @@ class SiteController extends Controller
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['logout', 'index'],
+                        'actions' => ['logout', 'index', 'save-colors', 'delete-color'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -61,6 +63,39 @@ class SiteController extends Controller
     public function actionIndex()
     {
         return $this->render('index');
+    }
+
+    /**
+     * Сохранение цветов
+     */
+    public function actionSaveColors()
+    {
+        if ($_POST['Color']) {
+            foreach ($_POST['Color'] as $color) {
+                $model = Color::findOne($color['id']) ?? new Color();
+                if (!$model->load($color, '') || !$model->save()) {
+                    Yii::$app->session->setFlash('error', Html::errorSummary($model));
+                }
+            }
+        }
+
+        $this->redirect('index');
+    }
+
+    /**
+     * Удаление цвета
+     * @return array
+     */
+    public function actionDeleteColor()
+    {
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $model = Color::findOne($_POST['id']);
+        $model->deleted = true;
+        if($model->save()) {
+            return ['result' => true];
+        } else {
+            return ['result' => false, 'message' => Html::errorSummary($model, ['header' => ''])];
+        }
     }
 
     /**

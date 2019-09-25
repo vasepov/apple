@@ -6,8 +6,9 @@
 
 $this->title = 'мой сад';
 
-use common\models\State;
-use yii\helpers\Html; ?>
+use yii\helpers\Html;
+
+?>
 <?= Html::a('Добавить до 10 яблок', ['add-apples'], ['class' => 'btn']) ?>
 <?= Html::button('Потрести', ['class' => 'btn']) ?>
 <div class="row">

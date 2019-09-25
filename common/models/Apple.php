@@ -13,8 +13,6 @@ use yii\db\ActiveRecord;
  * @property int $state_id
  * @property int $how_much_is_eaten
  * @property int $deleted
- *
- * @property State $state
  */
 class Apple extends ActiveRecord
 {
@@ -47,14 +45,6 @@ class Apple extends ActiveRecord
             'create_date' => 'Дата появления',
             'drop_date' => 'Дата падения'
         ];
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getState()
-    {
-        return $this->hasOne(State::class, ['id' =>'state_id']);
     }
 
     /**
