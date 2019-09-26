@@ -22,7 +22,7 @@ class m130524_201442_init extends Migration
             'auth_key' => $this->string(32)->notNull(),
             'password_hash' => $this->string()->notNull(),
             'password_reset_token' => $this->string()->unique(),
-            'email' => $this->string()->notNull()->unique(),
+            'email' => $this->string(),
 
             'status' => $this->smallInteger()->notNull()->defaultValue(10),
             'created_at' => $this->integer()->notNull(),
@@ -33,6 +33,7 @@ class m130524_201442_init extends Migration
             '{{%user}}',
             [
                 'username' => 'admin',
+                'auth_key' => '',
                 'password_hash' => '$2y$13$ZFKp7vDfFmGzOI8BTo9vLeTNVy7r8SpEJbzLKHejB8cmeMb3dHH6q',
                 'status' => 10,
                 'created_at' => 1568631945,

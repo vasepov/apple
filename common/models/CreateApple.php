@@ -20,6 +20,7 @@ class CreateApple extends Model
             $model->color_id = $colorIds[array_rand($colorIds)];
             $model->create_date = time();
             $model->state_id = State::IN_TREE;
+            $model->how_much_is_eaten = 0;
             if (!$model->save()) {
                 $this->addError('ALL', 'Добавлено ' . $i - 1 . ' яблок');
                 $this->addErrors($model->errors);
