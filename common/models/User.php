@@ -28,18 +28,13 @@ class User extends ActiveRecord implements IdentityInterface
     const STATUS_INACTIVE = 9;
     const STATUS_ACTIVE = 10;
 
-
-    /**
-     * {@inheritdoc}
-     */
+    /** @inheritdoc */
     public static function tableName()
     {
         return '{{%user}}';
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    /** @inheritdoc */
     public function behaviors()
     {
         return [
@@ -47,9 +42,7 @@ class User extends ActiveRecord implements IdentityInterface
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    /** @inheritdoc */
     public function rules()
     {
         return [
@@ -58,17 +51,13 @@ class User extends ActiveRecord implements IdentityInterface
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    /** @inheritdoc */
     public static function findIdentity($id)
     {
         return static::findOne(['id' => $id, 'status' => self::STATUS_ACTIVE]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    /** @inheritdoc */
     public static function findIdentityByAccessToken($token, $type = null)
     {
         throw new NotSupportedException('"findIdentityByAccessToken" is not implemented.');
@@ -133,25 +122,19 @@ class User extends ActiveRecord implements IdentityInterface
         return $timestamp + $expire >= time();
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    /** @inheritdoc */
     public function getId()
     {
         return $this->getPrimaryKey();
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    /** @inheritdoc */
     public function getAuthKey()
     {
         return $this->auth_key;
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    /** @inheritdoc */
     public function validateAuthKey($authKey)
     {
         return $this->getAuthKey() === $authKey;
@@ -170,8 +153,8 @@ class User extends ActiveRecord implements IdentityInterface
 
     /**
      * Generates password hash from password and sets it to the model
-     *
      * @param string $password
+     * @throws \yii\base\Exception
      */
     public function setPassword($password)
     {

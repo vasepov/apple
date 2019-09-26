@@ -10,7 +10,7 @@ use yii\helpers\Html;
 
 ?>
 <?= Html::a('Добавить до 10 яблок', ['add-apples'], ['class' => 'btn']) ?>
-<?= Html::button('Потрести', ['class' => 'btn']) ?>
+<?= Html::a('Потрести дерево', ['apple-on-earth'], ['class' => 'btn']) ?>
 <div class="row">
     <div class="col-lg-3">
         <?= $this->render('_onTree') ?>

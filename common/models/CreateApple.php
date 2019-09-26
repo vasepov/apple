@@ -3,8 +3,12 @@ namespace common\models;
 
 use yii\base\Model;
 use yii\db\Query;
-use yii\helpers\Html;
 
+/**
+ * Модель создания яблок с рандомным числом 10
+ * Class CreateApple
+ * @package common\models
+ */
 class CreateApple extends Model
 {
     public function create()

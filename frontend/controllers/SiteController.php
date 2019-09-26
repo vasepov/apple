@@ -1,8 +1,10 @@
 <?php
+
 namespace frontend\controllers;
 
 use common\models\Apple;
 use common\models\CreateApple;
+use common\models\State;
 use Yii;
 use yii\helpers\Html;
 use yii\web\Controller;
@@ -95,5 +97,19 @@ class SiteController extends Controller
         } else {
             return ['result' => false, 'message' => 'Не найдено кусаемое яблоко'];
         }
+    }
+
+    /**
+     * Тресём дерево, роняем яблоки, но не больше 3 за раз
+     */
+    public function actionAppleOnEarth()
+    {
+        for ($i = 1; $i <= rand(1,3); $i++) {
+            $model = Apple::find()->where(['state_id' => State::IN_TREE])->orderBy(['id' => SORT_ASC])->one();
+            $model->drop_date = time();
+            $model->state_id = State::UNDERFOOT;
+            $model->save();
+        }
+        $this->redirect(['site/index']);
     }
 }

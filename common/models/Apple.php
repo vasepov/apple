@@ -38,6 +38,9 @@ class Apple extends ActiveRecord
         ];
     }
 
+    /**
+     * Проверка укусывания яблока, что бы в минус не откусили
+     */
     public function validateEat()
     {
         if ($this->getOldAttribute('how_much_is_eaten') > $this->how_much_is_eaten) {
