@@ -2,8 +2,12 @@
 
 use yii\db\Migration;
 
+/**
+ * Class m130524_201442_init
+ */
 class m130524_201442_init extends Migration
 {
+    /** @inheritDoc */
     public function up()
     {
         $tableOptions = null;
@@ -23,9 +27,21 @@ class m130524_201442_init extends Migration
             'status' => $this->smallInteger()->notNull()->defaultValue(10),
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->notNull(),
+            'verification_token' => $this->string()
         ], $tableOptions);
+        $this->insert(
+            '{{%user}}',
+            [
+                'username' => 'admin',
+                'password_hash' => '$2y$13$ZFKp7vDfFmGzOI8BTo9vLeTNVy7r8SpEJbzLKHejB8cmeMb3dHH6q',
+                'status' => 10,
+                'created_at' => 1568631945,
+                'updated_at' => 1568631945
+            ]
+        );
     }
 
+    /** @inheritDoc */
     public function down()
     {
         $this->dropTable('{{%user}}');

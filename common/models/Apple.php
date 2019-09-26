@@ -77,6 +77,9 @@ class Apple extends ActiveRecord
         }
     }
 
+    /**
+     * @return string
+     */
     public function getColor()
     {
         return $this->colorModel->color;

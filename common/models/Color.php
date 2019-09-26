@@ -8,7 +8,7 @@ use yii\db\ActiveRecord;
  * Apple model
  *
  * @property int $id
- * @property int $color
+ * @property string $color
  * @property bool $deleted
  */
 class Color extends ActiveRecord

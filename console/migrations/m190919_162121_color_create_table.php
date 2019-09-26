@@ -22,6 +22,8 @@ class m190919_162121_color_create_table extends Migration
             'color' => $this->string()->notNull(),
             'deleted' => $this->integer()->notNull()->defaultValue(0),
         ], $tableOptions);
+        $this->insert('{{%color}}', ['color' => 'red']);
+        $this->insert('{{%color}}', ['color' => 'green']);
     }
 
     /**
